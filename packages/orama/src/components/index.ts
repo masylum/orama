@@ -125,7 +125,7 @@ export async function insertDocumentScoreParameters(
   index.frequencies[prop][internalId] = {}
 }
 
-export async function insertTokenScoreParameters(
+export function insertTokenScoreParameters(
   index: Index,
   prop: string,
   id: DocumentID,
@@ -313,7 +313,7 @@ function insertScalarBuilder(
         await implementation.insertDocumentScoreParameters(index, prop, internalId, tokens, docsCount)
 
         for (const token of tokens) {
-          await implementation.insertTokenScoreParameters(index, prop, internalId, tokens, token)
+          implementation.insertTokenScoreParameters(index, prop, internalId, tokens, token)
 
           radixInsert(node, token, internalId)
         }
