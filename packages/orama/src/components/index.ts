@@ -153,11 +153,9 @@ export async function insertTokenScoreParameters(
 export async function removeDocumentScoreParameters(
   index: Index,
   prop: string,
-  id: DocumentID,
+  internalId: DocumentID,
   docsCount: number
 ): Promise<void> {
-  const internalId = getInternalDocumentId(index.sharedInternalDocumentStore, id)
-
   index.avgFieldLength[prop] =
     (index.avgFieldLength[prop] * docsCount - index.fieldLengths[prop][internalId]!) / (docsCount - 1)
   index.fieldLengths[prop][internalId] = undefined
